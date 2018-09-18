@@ -1,3 +1,4 @@
+//fields object required by Ipay
 const fields = {
     "live" : "0",
     "oid" : "112",
@@ -19,16 +20,18 @@ const fields = {
 var datastring = "";
 var hashkey = "demo";
 
+//prepare the datastring before hashing
 for (const key in fields) {
-datastring += fields[key];
+    datastring += fields[key];
 }
 
 const generated_hash = CryptoJS.HmacSHA1(datastring, hashkey);
 
 var form_fields;
 
+//create form fields
 for (const key in fields) {        
-form_fields += '<label>'+key+'</label><input name="'+key+'" type="text" value="'+fields[key]+'"><br/>';
+    form_fields += '<label>'+key+'</label><input name="'+key+'" type="text" value="'+fields[key]+'"><br/>';
 }
 
 form_fields += '<input name="hsh" type="text" value="'+generated_hash+'" ><br/>';
